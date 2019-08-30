@@ -1,0 +1,5 @@
+dispatch:
+  - url: "cinebot.niweera.gq/*"
+    service: cinebot
+  - url: "cb.niweera.gq/*"
+    service: default
