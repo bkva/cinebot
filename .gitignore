@@ -4,3 +4,4 @@ package-lock.json
 words_alpha.txt
 cloudbuild.ya
 gae.json
+/build
