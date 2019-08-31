@@ -1,8 +1,8 @@
-<!-- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![HitCount](http://hits.dwyl.io/Niweera/wordhunter.svg)](http://hits.dwyl.io/Niweera/wordhunter)
-![GitHub issues](https://img.shields.io/github/issues/Niweera/wordhunter)
-![Website](https://img.shields.io/website/https/wordhunter.niweera.gq?down_color=lightgrey&down_message=offline&up_color=blue&up_message=online)
-[![Build Status](https://travis-ci.com/Niweera/wordhunter.svg?branch=master)](https://travis-ci.com/Niweera/wordhunter) -->
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![HitCount](http://hits.dwyl.io/Niweera/cinebot.svg)](http://hits.dwyl.io/Niweera/cinebot)
+![GitHub issues](https://img.shields.io/github/issues/Niweera/cinebot)
+![Website](https://img.shields.io/website/https/cinebot.niweera.gq?down_color=lightgrey&down_message=offline&up_color=blue&up_message=online)
+[![Build Status](https://travis-ci.com/Niweera/cinebot.svg?branch=master)](https://travis-ci.com/Niweera/cinebot) 
 
 # CineBot
 
