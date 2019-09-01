@@ -12,13 +12,23 @@ class Dashboard extends Component {
       data: null,
       total: null,
       per_page: null,
-      current_page: null
+      current_page: null,
+      errors: null
     };
   }
   componentDidMount() {
     this.props.getStatus();
-    // this.props.getData(1);
+    this.props.getData(1);
   }
+
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.errors !== prevState.errors) {
+  //     return { errors: nextProps.errors };
+  //   } else {
+  //     return null;
+  //   }
+  //   if(nextProps.item.)
+  // }
 
   render() {
     const { cinebotStatus, links } = this.props.item;
