@@ -52,9 +52,7 @@ class Dashboard extends Component {
       linkComponent = data.map((link, index) => (
         <div key={index}>
           <a href={link.link} style={{ color: "white" }}>
-            <h5>
-              {index + 1}. {link.name}
-            </h5>
+            <h5>{link.name}</h5>
           </a>
           <a href={link.link} style={{ color: "white" }}>
             {link.link}
@@ -91,6 +89,8 @@ class Dashboard extends Component {
               </span>
             </li>
           );
+        } else {
+          return null;
         }
       });
     }
