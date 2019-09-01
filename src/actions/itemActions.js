@@ -30,10 +30,10 @@ export const getStatus = () => dispatch => {
 };
 
 // Get Links
-export const getLinks = () => dispatch => {
+export const getLinks = (pageno, size) => dispatch => {
   dispatch(setItemLoading());
   axios
-    .get(`https://cb.niweera.gq/links`)
+    .get(`https://cb.niweera.gq/links?pageno=${pageno}&size=${size}`)
     .then(res => {
       dispatch({
         type: GET_LINKS,
