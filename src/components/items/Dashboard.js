@@ -6,17 +6,14 @@ import { getStatus, getData } from "../../actions/itemActions";
 import ScrollUp from "../layout/ScrollUp";
 
 class Dashboard extends Component {
-  constructor() {
-    super();
-    this.state = {
-      data: null,
-      total: null,
-      total_pages: null,
-      per_page: null,
-      current_page: null,
-      errors: null
-    };
-  }
+  state = {
+    data: null,
+    total: null,
+    total_pages: null,
+    per_page: null,
+    current_page: 1,
+    errors: null
+  };
 
   componentDidMount() {
     this.props.getStatus();
@@ -25,7 +22,7 @@ class Dashboard extends Component {
 
   makeHttpRequestWithPage = async pageno => {
     const response = await fetch(
-      `https://cb.niweera.gq/links?pageno=${pageno}&size=2`,
+      `https://cb.niweera.gq/links?pageno=${pageno}&size=20`,
       {
         method: "GET",
         headers: {
@@ -78,17 +75,22 @@ class Dashboard extends Component {
       renderPageNumbers = pageNumbers.map(number => {
         let classes = current_page === number ? "active" : "";
 
-        return (
-          <li key={number}>
-            <span
-              id="pagin"
-              className={classes}
-              onClick={() => this.makeHttpRequestWithPage(number)}
-            >
-              {number}
-            </span>
-          </li>
-        );
+        if (
+          number === 1 ||
+          number === this.state.total ||
+          (number >= current_page - 2 && number <= current_page + 2)
+        ) {
+          return (
+            <li className="page-item" key={number}>
+              <span
+                className={classes}
+                onClick={() => this.makeHttpRequestWithPage(number)}
+              >
+                {number}
+              </span>
+            </li>
+          );
+        }
       });
     }
 
@@ -135,43 +137,30 @@ class Dashboard extends Component {
             }}
           >
             <div id="linkSection" className="container">
-              {data ? (
-                <div className={"ml-3 mr-3"} style={{ textAlign: "left" }}>
-                  {linkComponent}
-                  <div className="row">
-                    <div className="col-md-4"></div>
-                    <div className="col-md-4 text-center">
-                      <nav aria-label="Page navigation example">
-                        <ul className="pagination">
-                          <li className="page-item">
-                            <span
-                              id="pagin"
-                              onClick={() => this.makeHttpRequestWithPage(1)}
-                            >
-                              &laquo;
-                            </span>
-                          </li>
-                          {renderPageNumbers}
-                          <li className="page-item">
-                            <span
-                              id="pagin"
-                              onClick={() =>
-                                this.makeHttpRequestWithPage(total_pages)
-                              }
-                            >
-                              &laquo;
-                            </span>
-                          </li>
-                          <li className="page-item"></li>
-                        </ul>
-                      </nav>
-                    </div>
-                    <div className="col-md-4"></div>
+              <div className={"ml-3 mr-3"} style={{ textAlign: "left" }}>
+                {linkComponent}
+                <div className="row">
+                  <div className="col-md-1"></div>
+                  <div className="col-md-10 text-center">
+                    <nav aria-label="Page navigation example">
+                      <ul className="pagination">
+                        <li className="page-item">
+                          <span onClick={() => this.makeHttpRequestWithPage(1)}>
+                            &laquo;
+                          </span>
+                        </li>
+                        {renderPageNumbers}
+                        <li className="page-item">
+                          <span onClick={() => this.makeHttpRequestWithPage(1)}>
+                            &raquo;
+                          </span>
+                        </li>
+                      </ul>
+                    </nav>
                   </div>
+                  <div className="col-md-1"></div>
                 </div>
-              ) : (
-                <Spinner />
-              )}
+              </div>
             </div>
           </div>
         </div>
