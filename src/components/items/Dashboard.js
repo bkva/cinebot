@@ -73,7 +73,8 @@ class Dashboard extends Component {
       }
 
       renderPageNumbers = pageNumbers.map(number => {
-        let classes = current_page === number ? "active" : "";
+        let classes =
+          current_page === number ? "page-item active" : "page-item";
 
         if (
           number === 1 ||
@@ -81,9 +82,9 @@ class Dashboard extends Component {
           (number >= current_page - 2 && number <= current_page + 2)
         ) {
           return (
-            <li className="page-item" key={number}>
+            <li className={classes} key={number}>
               <span
-                className={classes}
+                className="page-link"
                 onClick={() => this.makeHttpRequestWithPage(number)}
               >
                 {number}
@@ -140,25 +141,31 @@ class Dashboard extends Component {
               <div className={"ml-3 mr-3"} style={{ textAlign: "left" }}>
                 {linkComponent}
                 <div className="row">
-                  <div className="col-md-1"></div>
-                  <div className="col-md-10 text-center">
+                  <div className="col-md-12 text-center">
                     <nav aria-label="Page navigation example">
-                      <ul className="pagination">
+                      <ul className="pagination text-center">
                         <li className="page-item">
-                          <span onClick={() => this.makeHttpRequestWithPage(1)}>
+                          <span
+                            className="page-link"
+                            onClick={() => this.makeHttpRequestWithPage(1)}
+                          >
                             &laquo;
                           </span>
                         </li>
                         {renderPageNumbers}
                         <li className="page-item">
-                          <span onClick={() => this.makeHttpRequestWithPage(1)}>
+                          <span
+                            className="page-link"
+                            onClick={() =>
+                              this.makeHttpRequestWithPage(total_pages)
+                            }
+                          >
                             &raquo;
                           </span>
                         </li>
                       </ul>
                     </nav>
                   </div>
-                  <div className="col-md-1"></div>
                 </div>
               </div>
             </div>

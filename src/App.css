@@ -204,3 +204,34 @@ a.socialIcon:hover,
   white-space: -o-pre-wrap; /* Opera 7 */
   word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
+
+.pagination span {
+  cursor: pointer;
+  color: white;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid #212529;
+  background-color: #212529;
+}
+
+.pagination span.active {
+  background-color: #d2d2d3;
+  color: white;
+  border: 1px solid #a1a2a3;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: black;
+  background-color: #d2d2d3;
+  border-color: #a1a2a3;
+}
+
+.page-item:hover .page-link {
+  z-index: 1;
+  color: black;
+  background-color: #d2d2d3;
+  border-color: #a1a2a3;
+}
