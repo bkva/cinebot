@@ -18,7 +18,6 @@ class Dashboard extends Component {
     };
   }
 
-
   componentDidMount() {
     this.props.getStatus();
     this.props.getData(1);
@@ -66,14 +65,15 @@ class Dashboard extends Component {
         let classes = current_page === number ? "active" : "";
 
         return (
-          <li><span
-            key={number}
-            id="pagin"
-            className={classes}
-            onClick={}
-          >
-            {number}
-          </span></li>
+          <li key={number}>
+            <span
+              id="pagin"
+              className={classes}
+              onClick={this.props.getData(number)}
+            >
+              {number}
+            </span>
+          </li>
         );
       });
     }
@@ -146,7 +146,7 @@ class Dashboard extends Component {
                             &laquo;
                           </span>
                         </li>
-                       {renderPageNumbers}
+                        {renderPageNumbers}
                         <li className="page-item">
                           <span
                             id="pagin"
