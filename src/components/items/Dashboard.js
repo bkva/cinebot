@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
-import { getStatus, getLinks } from "../../actions/itemActions";
+import { getStatus, getData } from "../../actions/itemActions";
 import ScrollUp from "../layout/ScrollUp";
 
 class Dashboard extends Component {
@@ -17,7 +17,7 @@ class Dashboard extends Component {
   }
   componentDidMount() {
     this.props.getStatus();
-    this.props.getLinks(1, 10);
+    // this.props.getData(1);
   }
 
   render() {
@@ -87,30 +87,18 @@ class Dashboard extends Component {
                     <nav aria-label="Page navigation example">
                       <ul class="pagination">
                         <li class="page-item">
-                          <a class="page-link" href="#">
-                            Previous
-                          </a>
+                          <span onClick={() => console.log("1")}>1</span>
                         </li>
                         <li class="page-item">
-                          <a class="page-link" href="#">
-                            1
-                          </a>
+                          <span onClick={() => console.log("1")}>2</span>
                         </li>
                         <li class="page-item">
-                          <a class="page-link" href="#">
-                            2
-                          </a>
+                          <span onClick={() => console.log("1")}>3</span>
                         </li>
                         <li class="page-item">
-                          <a class="page-link" href="#">
-                            3
-                          </a>
+                          <span onClick={() => console.log("1")}>4</span>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
-                            Next
-                          </a>
-                        </li>
+                        <li class="page-item"></li>
                       </ul>
                     </nav>
                   </div>
@@ -129,14 +117,14 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getStatus: PropTypes.func.isRequired,
-  getLinks: PropTypes.func.isRequired,
+  getData: PropTypes.func.isRequired,
   item: PropTypes.object,
   errors: PropTypes.object
 };
 
 const mapDispatchToProps = {
   getStatus: getStatus,
-  getLinks: getLinks
+  getData: getData
 };
 
 const mapStateToProps = state => ({
