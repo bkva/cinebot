@@ -23,36 +23,50 @@ class Dashboard extends Component {
     this.props.getData(1);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.errors !== prevState.errors) {
-      return { errors: nextProps.errors };
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.errors !== prevState.errors) {
+  //     return { errors: nextProps.errors };
+  //   }
+
+  //   if (nextProps.item.links !== null) {
+  //     if (nextProps.item.links.page !== prevState.current_page) {
+  //       return {
+  // data: nextProps.item.links.data,
+  // total: nextProps.item.links.total,
+  // per_page: nextProps.item.links.per_page,
+  // current_page: nextProps.item.links.page,
+  // total_pages: nextProps.item.links.total_pages
+  //       };
+  //     }
+  //   } else {
+  //     return null;
+  //   }
+  // }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors !== this.props.errors) {
+      this.setState({ errors: nextProps.errors });
     }
 
-    if (nextProps.item.links !== null) {
-      if (nextProps.item.links.page !== prevState.current_page) {
-        return {
-          data: nextProps.item.links.data,
-          total: nextProps.item.links.total,
-          per_page: nextProps.item.links.per_page,
-          current_page: nextProps.item.links.page,
-          total_pages: nextProps.item.links.total_pages
-        };
+    if (nextProps.item !== null) {
+      const links = nextProps.item.links;
+      const { page, per_page, total, total_pages, data } = links;
+      console.log(data);
+      if (data !== this.props.item.links.data) {
+        this.setState({
+          data: data ? data : null,
+          total: total ? total : null,
+          total_pages: total_pages ? total_pages : null,
+          per_page: per_page ? per_page : null,
+          current_page: page ? page : null
+        });
       }
-    } else {
-      return null;
     }
   }
 
   render() {
     const { cinebotStatus } = this.props.item;
-    const {
-      data,
-      total,
-      total_pages,
-      per_page,
-      current_page,
-      errors
-    } = this.state;
+    const { data, total, total_pages, current_page } = this.state;
 
     const pageNumbers = [];
     let renderPageNumbers;
