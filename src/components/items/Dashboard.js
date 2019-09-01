@@ -15,11 +15,18 @@ class Dashboard extends Component {
 
     return (
       <div className="container">
-        <div className="jumbotron jumbotron-fluid  border border-secondary mt-5">
+        <div
+          className="container-fluid mt-5"
+          style={{
+            backgroundColor: "#3b3a30",
+            textShadow: "0 1px 3px rgba(0,0,0,.5)",
+            color: "white"
+          }}
+        >
           <div className="container">
-            <h1 className="h2">
+            <h1 className="h3">
               Welcome to CineBot!
-              <br /> <span className="h3">All the links from one place...</span>
+              <br /> <span className="h4">All the links from one place...</span>
             </h1>
             <hr />
             {cinebotStatus ? (
@@ -37,18 +44,25 @@ class Dashboard extends Component {
           </div>
         </div>
 
-        <div className="jumbotron jumbotron-fluid  border border-secondary mt-5 mb-5">
+        <div
+          className="jumbotron mt-5 mb-5"
+          style={{
+            backgroundColor: "#3b3a30",
+            textShadow: "0 1px 3px rgba(0,0,0,.5)",
+            color: "white"
+          }}
+        >
           <div className="container">
             {links ? (
               <div className={"ml-5 mr-5"} style={{ textAlign: "left" }}>
                 {links.map((link, index) => (
                   <div key={index}>
-                    <a href={link.link} style={{ color: "black" }}>
+                    <a href={link.link} style={{ color: "white" }}>
                       <h5>
                         {index + 1}. {link.name}
                       </h5>
                     </a>
-                    <a href={link.link} style={{ color: "black" }}>
+                    <a href={link.link} style={{ color: "white" }}>
                       {link.link}
                     </a>
                     <br />
