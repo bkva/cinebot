@@ -8,7 +8,7 @@ import ScrollUp from "../layout/ScrollUp";
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getStatus();
-    this.props.getLinks(1, 20);
+    this.props.getLinks();
   }
 
   render() {
@@ -72,20 +72,6 @@ class Dashboard extends Component {
                     <br></br>
                   </div>
                 ))}
-                <div className="row">
-                  <div className="col-md-3"></div>
-                  <div className="col-md-3 text-center">
-                    <button type="button" class="btn btn-secondary btn-block">
-                      Previous
-                    </button>
-                  </div>
-                  <div className="col-md-3 text-center">
-                    <button type="button" class="btn btn-secondary btn-block">
-                      Next
-                    </button>
-                  </div>
-                  <div className="col-md-3"></div>
-                </div>
               </div>
             ) : (
               <Spinner />
