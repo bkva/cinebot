@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
 import { getStatus, getLinks } from "../../actions/itemActions";
+import ScrollUp from "../layout/ScrollUp";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -15,6 +16,7 @@ class Dashboard extends Component {
 
     return (
       <div className="container mt-5">
+        <ScrollUp />
         <div
           className="container pt-3 pb-3"
           style={{
