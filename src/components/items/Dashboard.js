@@ -6,6 +6,15 @@ import { getStatus, getLinks } from "../../actions/itemActions";
 import ScrollUp from "../layout/ScrollUp";
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null,
+      total: null,
+      per_page: null,
+      current_page: null
+    };
+  }
   componentDidMount() {
     this.props.getStatus();
     this.props.getLinks(1, 10);
