@@ -50,7 +50,6 @@ export const getStatus = () => dispatch => {
 
 //Get paginated data
 export const getData = pageno => dispatch => {
-  console.log(pageno);
   dispatch(setItemLoading());
   axios
     .get(`https://cb.niweera.gq/links?pageno=${pageno}&size=20`)

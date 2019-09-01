@@ -17,6 +17,8 @@ class Dashboard extends Component {
       errors: null
     };
   }
+
+
   componentDidMount() {
     this.props.getStatus();
     this.props.getData(1);
@@ -64,14 +66,14 @@ class Dashboard extends Component {
         let classes = current_page === number ? "active" : "";
 
         return (
-          <span
+          <li><span
             key={number}
             id="pagin"
             className={classes}
-            onClick={() => this.props.getData(number)}
+            onClick={}
           >
             {number}
-          </span>
+          </span></li>
         );
       });
     }
@@ -140,18 +142,15 @@ class Dashboard extends Component {
                     <nav aria-label="Page navigation example">
                       <ul className="pagination">
                         <li className="page-item">
-                          <span
-                            id="pagin"
-                            onClick={() => this.props.getData(1)}
-                          >
+                          <span id="pagin" onClick={this.props.getData(1)}>
                             &laquo;
                           </span>
                         </li>
-                        <li className="page-item">{renderPageNumbers}</li>
+                       {renderPageNumbers}
                         <li className="page-item">
                           <span
                             id="pagin"
-                            onClick={() => this.props.getData(total_pages)}
+                            onClick={this.props.getData(total_pages)}
                           >
                             &laquo;
                           </span>
