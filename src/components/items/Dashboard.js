@@ -48,17 +48,16 @@ class Dashboard extends Component {
       this.setState({ errors: nextProps.errors });
     }
 
-    if (nextProps.item !== null) {
+    if (nextProps.item.links !== null) {
       const links = nextProps.item.links;
       const { page, per_page, total, total_pages, data } = links;
-      console.log(data);
-      if (data !== this.props.item.links.data) {
+      if (this.props.item.links !== links) {
         this.setState({
-          data: data ? data : null,
-          total: total ? total : null,
-          total_pages: total_pages ? total_pages : null,
-          per_page: per_page ? per_page : null,
-          current_page: page ? page : null
+          data: data,
+          total: total,
+          total_pages: total_pages,
+          per_page: per_page,
+          current_page: page
         });
       }
     }
@@ -67,30 +66,6 @@ class Dashboard extends Component {
   render() {
     const { cinebotStatus } = this.props.item;
     const { data, total, total_pages, current_page } = this.state;
-
-    const pageNumbers = [];
-    let renderPageNumbers;
-    if (total !== null) {
-      for (let i = 1; i <= total_pages; i++) {
-        pageNumbers.push(i);
-      }
-
-      renderPageNumbers = pageNumbers.map(number => {
-        let classes = current_page === number ? "active" : "";
-
-        return (
-          <li key={number}>
-            <span
-              id="pagin"
-              className={classes}
-              onClick={this.props.getData(number)}
-            >
-              {number}
-            </span>
-          </li>
-        );
-      });
-    }
 
     return (
       <div className="container mt-5">
@@ -160,7 +135,7 @@ class Dashboard extends Component {
                             &laquo;
                           </span>
                         </li>
-                        {renderPageNumbers}
+                        {/* {renderPageNumbers} */}
                         <li className="page-item">
                           <span
                             id="pagin"
