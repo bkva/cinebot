@@ -25,7 +25,7 @@ class Dashboard extends Component {
 
   makeHttpRequestWithPage = async pageno => {
     const response = await fetch(
-      `https://cb.niweera.gq/links?pageno=${pageno}&size=20`,
+      `https://cb.niweera.gq/links?pageno=${pageno}&size=2`,
       {
         method: "GET",
         headers: {
@@ -49,6 +49,48 @@ class Dashboard extends Component {
   render() {
     const { cinebotStatus } = this.props.item;
     const { data, total, total_pages, current_page } = this.state;
+    let linkComponent, renderPageNumbers;
+
+    if (data !== null) {
+      linkComponent = data.map((link, index) => (
+        <div key={index}>
+          <a href={link.link} style={{ color: "white" }}>
+            <h5>
+              {index + 1}. {link.name}
+            </h5>
+          </a>
+          <a href={link.link} style={{ color: "white" }}>
+            {link.link}
+          </a>
+          <br />
+          <br></br>
+          <br></br>
+        </div>
+      ));
+    }
+
+    const pageNumbers = [];
+    if (total !== null) {
+      for (let i = 1; i <= total_pages; i++) {
+        pageNumbers.push(i);
+      }
+
+      renderPageNumbers = pageNumbers.map(number => {
+        let classes = current_page === number ? "active" : "";
+
+        return (
+          <li key={number}>
+            <span
+              id="pagin"
+              className={classes}
+              onClick={() => this.makeHttpRequestWithPage(number)}
+            >
+              {number}
+            </span>
+          </li>
+        );
+      });
+    }
 
     if (data) {
       return (
@@ -95,39 +137,30 @@ class Dashboard extends Component {
             <div id="linkSection" className="container">
               {data ? (
                 <div className={"ml-3 mr-3"} style={{ textAlign: "left" }}>
-                  {data.map((link, index) => (
-                    <div key={index}>
-                      <a href={link.link} style={{ color: "white" }}>
-                        <h5>
-                          {index + 1}. {link.name}
-                        </h5>
-                      </a>
-                      <a href={link.link} style={{ color: "white" }}>
-                        {link.link}
-                      </a>
-                      <br />
-                      <br></br>
-                      <br></br>
-                    </div>
-                  ))}
+                  {linkComponent}
                   <div className="row">
                     <div className="col-md-4"></div>
                     <div className="col-md-4 text-center">
                       <nav aria-label="Page navigation example">
                         <ul className="pagination">
                           <li className="page-item">
-                            {/* <span id="pagin" onClick={this.props.getData()}>
-                              &laquo;
-                            </span> */}
-                          </li>
-                          {/* {renderPageNumbers} */}
-                          <li className="page-item">
-                            {/* <span
+                            <span
                               id="pagin"
-                              onClick={this.props.getData(total_pages)}
+                              onClick={() => this.makeHttpRequestWithPage(1)}
                             >
                               &laquo;
-                            </span> */}
+                            </span>
+                          </li>
+                          {renderPageNumbers}
+                          <li className="page-item">
+                            <span
+                              id="pagin"
+                              onClick={() =>
+                                this.makeHttpRequestWithPage(total_pages)
+                              }
+                            >
+                              &laquo;
+                            </span>
                           </li>
                           <li className="page-item"></li>
                         </ul>
