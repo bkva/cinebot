@@ -11,6 +11,7 @@ class Dashboard extends Component {
     this.state = {
       data: null,
       total: null,
+      total_pages: null,
       per_page: null,
       current_page: null,
       errors: null
@@ -32,7 +33,8 @@ class Dashboard extends Component {
           data: nextProps.item.links.data,
           total: nextProps.item.links.total,
           per_page: nextProps.item.links.per_page,
-          current_page: nextProps.item.links.page
+          current_page: nextProps.item.links.page,
+          total_pages: nextProps.item.links.total_pages
         };
       }
     } else {
@@ -42,7 +44,38 @@ class Dashboard extends Component {
 
   render() {
     const { cinebotStatus } = this.props.item;
-    const { data, total, per_page, current_page, errors } = this.state;
+    const {
+      data,
+      total,
+      total_pages,
+      per_page,
+      current_page,
+      errors
+    } = this.state;
+
+    const pageNumbers = [];
+    let renderPageNumbers;
+    if (total !== null) {
+      for (let i = 1; i <= total_pages; i++) {
+        pageNumbers.push(i);
+      }
+
+      renderPageNumbers = pageNumbers.map(number => {
+        let classes = current_page === number ? "active" : "";
+
+        return (
+          <span
+            key={number}
+            id="pagin"
+            className={classes}
+            onClick={() => this.props.getData(number)}
+          >
+            {number}
+          </span>
+        );
+      });
+    }
+
     return (
       <div className="container mt-5">
         <ScrollUp />
@@ -109,25 +142,18 @@ class Dashboard extends Component {
                         <li className="page-item">
                           <span
                             id="pagin"
-                            className="active"
-                            onClick={() => console.log("1")}
+                            onClick={() => this.props.getData(1)}
                           >
-                            1
+                            &laquo;
                           </span>
                         </li>
+                        <li className="page-item">{renderPageNumbers}</li>
                         <li className="page-item">
-                          <span id="pagin" onClick={() => console.log("1")}>
-                            2
-                          </span>
-                        </li>
-                        <li className="page-item">
-                          <span id="pagin" onClick={() => console.log("1")}>
-                            3
-                          </span>
-                        </li>
-                        <li className="page-item">
-                          <span id="pagin" onClick={() => console.log("1")}>
-                            4
+                          <span
+                            id="pagin"
+                            onClick={() => this.props.getData(total_pages)}
+                          >
+                            &laquo;
                           </span>
                         </li>
                         <li className="page-item"></li>

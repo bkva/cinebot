@@ -29,27 +29,28 @@ export const getStatus = () => dispatch => {
     );
 };
 
-// Get Links
-export const getLinks = (pageno, size) => dispatch => {
-  dispatch(setItemLoading());
-  axios
-    .get(`https://cb.niweera.gq/links?pageno=${pageno}&size=${size}`)
-    .then(res => {
-      dispatch({
-        type: GET_LINKS,
-        payload: res.data
-      });
-    })
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
+// // Get Links
+// export const getLinks = (pageno, size) => dispatch => {
+//   dispatch(setItemLoading());
+//   axios
+//     .get(`https://cb.niweera.gq/links?pageno=${pageno}&size=${size}`)
+//     .then(res => {
+//       dispatch({
+//         type: GET_LINKS,
+//         payload: res.data
+//       });
+//     })
+//     .catch(err =>
+//       dispatch({
+//         type: GET_ERRORS,
+//         payload: err.response.data
+//       })
+//     );
+// };
 
 //Get paginated data
 export const getData = pageno => dispatch => {
+  console.log(pageno);
   dispatch(setItemLoading());
   axios
     .get(`https://cb.niweera.gq/links?pageno=${pageno}&size=20`)
