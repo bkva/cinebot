@@ -204,3 +204,22 @@ a.socialIcon:hover,
   white-space: -o-pre-wrap; /* Opera 7 */
   word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
+
+.pagination {
+  margin-top: 25px;
+}
+.pagination span {
+  cursor: pointer;
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid #ddd;
+}
+
+.pagination span.active {
+  background-color: #0099ff;
+  color: white;
+  border: 1px solid #0099ff;
+}

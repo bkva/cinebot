@@ -25,17 +25,16 @@ class Dashboard extends Component {
     if (nextProps.errors !== prevState.errors) {
       return { errors: nextProps.errors };
     }
-    // if (nextProps.item.links.page !== prevState.current_page) {
-    //   return {
-    //     data: nextProps.item.links.data,
-    //     total: nextProps.item.links.total,
-    //     per_page: nextProps.item.links.per_page,
-    //     current_page: nextProps.item.links.page
-    //   };
-    // }
+
     if (nextProps.item.links !== null) {
-      console.log(nextProps);
-      return null;
+      if (nextProps.item.links.page !== prevState.current_page) {
+        return {
+          data: nextProps.item.links.data,
+          total: nextProps.item.links.total,
+          per_page: nextProps.item.links.per_page,
+          current_page: nextProps.item.links.page
+        };
+      }
     } else {
       return null;
     }
@@ -43,8 +42,7 @@ class Dashboard extends Component {
 
   render() {
     const { cinebotStatus } = this.props.item;
-    // const {data, total, per_page, current_page,errors}=this.state;
-    // console.log(this.state);
+    const { data, total, per_page, current_page, errors } = this.state;
     return (
       <div className="container mt-5">
         <ScrollUp />
@@ -85,10 +83,10 @@ class Dashboard extends Component {
             color: "white"
           }}
         >
-          {/* <div id="linkSection" className="container">
-            {links ? (
+          <div id="linkSection" className="container">
+            {data ? (
               <div className={"ml-3 mr-3"} style={{ textAlign: "left" }}>
-                {links.map((link, index) => (
+                {data.map((link, index) => (
                   <div key={index}>
                     <a href={link.link} style={{ color: "white" }}>
                       <h5>
@@ -130,7 +128,7 @@ class Dashboard extends Component {
             ) : (
               <Spinner />
             )}
-          </div> */}
+          </div>
         </div>
       </div>
     );
