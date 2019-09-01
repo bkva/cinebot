@@ -14,9 +14,9 @@ class Dashboard extends Component {
     const { cinebotStatus, links } = this.props.item;
 
     return (
-      <div className="container">
+      <div className="container mt-5">
         <div
-          className="container-fluid mt-5"
+          className="container pt-3 pb-3"
           style={{
             backgroundColor: "#3b3a30",
             textShadow: "0 1px 3px rgba(0,0,0,.5)",
@@ -52,9 +52,9 @@ class Dashboard extends Component {
             color: "white"
           }}
         >
-          <div className="container">
+          <div id="linkSection" className="container">
             {links ? (
-              <div className={"ml-5 mr-5"} style={{ textAlign: "left" }}>
+              <div className={"ml-3 mr-3"} style={{ textAlign: "left" }}>
                 {links.map((link, index) => (
                   <div key={index}>
                     <a href={link.link} style={{ color: "white" }}>
