@@ -205,10 +205,7 @@ a.socialIcon:hover,
   word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
-.pagination {
-  margin-top: 25px;
-}
-.pagination span {
+#pagin {
   cursor: pointer;
   color: black;
   float: left;
@@ -218,7 +215,7 @@ a.socialIcon:hover,
   border: 1px solid #ddd;
 }
 
-.pagination span.active {
+#pagin span.active {
   background-color: #0099ff;
   color: white;
   border: 1px solid #0099ff;

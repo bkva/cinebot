@@ -105,20 +105,32 @@ class Dashboard extends Component {
                   <div className="col-md-4"></div>
                   <div className="col-md-4 text-center">
                     <nav aria-label="Page navigation example">
-                      <ul class="pagination">
-                        <li class="page-item">
-                          <span onClick={() => console.log("1")}>1</span>
+                      <ul className="pagination">
+                        <li className="page-item">
+                          <span
+                            id="pagin"
+                            className="active"
+                            onClick={() => console.log("1")}
+                          >
+                            1
+                          </span>
                         </li>
-                        <li class="page-item">
-                          <span onClick={() => console.log("1")}>2</span>
+                        <li className="page-item">
+                          <span id="pagin" onClick={() => console.log("1")}>
+                            2
+                          </span>
                         </li>
-                        <li class="page-item">
-                          <span onClick={() => console.log("1")}>3</span>
+                        <li className="page-item">
+                          <span id="pagin" onClick={() => console.log("1")}>
+                            3
+                          </span>
                         </li>
-                        <li class="page-item">
-                          <span onClick={() => console.log("1")}>4</span>
+                        <li className="page-item">
+                          <span id="pagin" onClick={() => console.log("1")}>
+                            4
+                          </span>
                         </li>
-                        <li class="page-item"></li>
+                        <li className="page-item"></li>
                       </ul>
                     </nav>
                   </div>
