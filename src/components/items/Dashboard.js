@@ -11,37 +11,36 @@ class Dashboard extends Component {
     total: null,
     total_pages: null,
     per_page: null,
-    current_page: 1,
+    current_page: null,
     errors: null
   };
 
   componentDidMount() {
     this.props.getStatus();
-    this.makeHttpRequestWithPage(1);
+    this.props.getData(1);
   }
 
-  makeHttpRequestWithPage = async pageno => {
-    const response = await fetch(
-      `https://cb.niweera.gq/links?pageno=${pageno}&size=2`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.errors !== prevState.errors) {
+      return { errors: nextProps.errors };
+    }
+
+    if (nextProps.item.links !== null) {
+      if (nextProps.item.links.page !== prevState.current_page) {
+        return {
+          data: nextProps.item.links.data,
+          total: nextProps.item.links.total,
+          per_page: nextProps.item.links.per_page,
+          current_page: nextProps.item.links.page,
+          total_pages: nextProps.item.links.total_pages
+        };
+      } else {
+        return null;
       }
-    );
-
-    const data = await response.json();
-
-    this.setState({
-      data: data.data,
-      total: data.total,
-      total_pages: data.total_pages,
-      per_page: data.per_page,
-      current_page: data.page
-    });
-  };
+    } else {
+      return null;
+    }
+  }
 
   render() {
     const { cinebotStatus } = this.props.item;
@@ -83,7 +82,7 @@ class Dashboard extends Component {
             <li className={classes} key={number}>
               <span
                 className="page-link"
-                onClick={() => this.makeHttpRequestWithPage(number)}
+                onClick={() => this.props.getData(number)}
               >
                 {number}
               </span>
@@ -147,7 +146,7 @@ class Dashboard extends Component {
                         <li className="page-item">
                           <span
                             className="page-link"
-                            onClick={() => this.makeHttpRequestWithPage(1)}
+                            onClick={() => this.props.getData(1)}
                           >
                             &laquo;
                           </span>
@@ -156,9 +155,7 @@ class Dashboard extends Component {
                         <li className="page-item">
                           <span
                             className="page-link"
-                            onClick={() =>
-                              this.makeHttpRequestWithPage(total_pages)
-                            }
+                            onClick={() => this.props.getData(total_pages)}
                           >
                             &raquo;
                           </span>
