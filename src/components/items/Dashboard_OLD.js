@@ -22,7 +22,7 @@ class Dashboard extends Component {
 
   makeHttpRequestWithPage = async pageno => {
     const response = await fetch(
-      `https://cb.niweera.gq/links?pageno=${pageno}&size=2`,
+      `https://cb.niweera.gq/links?pageno=${pageno}&size=20`,
       {
         method: "GET",
         headers: {
