@@ -53,28 +53,32 @@ class Dashboard extends Component {
           <a href={link.link} style={{ color: "white" }}>
             <h5>{link.name}</h5>
           </a>
-
           <a href={link.link} style={{ color: "white" }}>
             {link.link}
           </a>
           <hr />
           <div className="container mt-3 text-center">
             {link.img === "null" ? (
-              <img
-                src="https://tvdb.niweera.gq/sample_poster.jpg"
-                style={{ maxWidth: "30%" }}
-                className="img-fluid"
-                alt="Poster"
-              />
+              <a href={link.link}>
+                <img
+                  src="https://tvdb.niweera.gq/sample_poster.jpg"
+                  style={{ maxWidth: "30%" }}
+                  className="img-fluid"
+                  alt="Poster"
+                />
+              </a>
             ) : (
-              <img
-                src={link.img}
-                style={{ maxWidth: "30%" }}
-                className="img-fluid"
-                alt="Poster"
-              />
+              <a href={link.link}>
+                <img
+                  src={link.img}
+                  style={{ maxWidth: "30%" }}
+                  className="img-fluid"
+                  alt="Poster"
+                />
+              </a>
             )}
           </div>
+          <hr />
           <br />
         </div>
       ));
