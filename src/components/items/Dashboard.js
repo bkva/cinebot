@@ -59,8 +59,8 @@ class Dashboard extends Component {
           <hr />
           <div className="container mt-3 text-center">
             <div className="row">
-              <div className="col-xl-3 col-lg-1 col-md-4 col-sm-1 col-1"></div>
-              <div className="col-xl-6 col-lg-10 col-md-4 col-sm-10 col-10">
+              <div className="col-xl-3 col-lg-0 col-md-0 col-sm-0 col-0"></div>
+              <div className="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                 {link.img === "null" ? (
                   <a href={link.link}>
                     <img
@@ -81,7 +81,7 @@ class Dashboard extends Component {
                   </a>
                 )}
               </div>
-              <div className="col-xl-3 col-lg-1 col-md-4 col-sm-1 col-1"></div>
+              <div className="col-xl-3 col-lg-0 col-md-0 col-sm-0 col-0"></div>
             </div>
           </div>
           <hr />
