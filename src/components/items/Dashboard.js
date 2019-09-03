@@ -59,8 +59,7 @@ class Dashboard extends Component {
           </a>
           <hr />
           <div className="container mt-3 text-center">
-            {link.img === "https://image.tmdb.org/t/p/originalnull" ||
-            link.img === "null" ? (
+            {link.img === "null" ? (
               <img
                 src="https://tvdb.niweera.gq/sample_poster.jpg"
                 style={{ maxWidth: "30%" }}
