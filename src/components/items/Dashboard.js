@@ -49,16 +49,17 @@ class Dashboard extends Component {
 
     if (data !== null) {
       linkComponent = data.map((link, index) => (
-        <div key={index}>
+        <div className="mt-3" key={index}>
           <a href={link.link} style={{ color: "white" }}>
             <h5>{link.name}</h5>
           </a>
           <a href={link.link} style={{ color: "white" }}>
             {link.link}
           </a>
+          <div className="container mt-3 text-center">
+            <img src={link.img} className="img-fluid" alt="Poster" />
+          </div>
           <br />
-          <br></br>
-          <br></br>
         </div>
       ));
     }
@@ -146,7 +147,10 @@ class Dashboard extends Component {
                         <li className="page-item">
                           <span
                             className="page-link"
-                            onClick={() => this.props.getData(1)}
+                            onClick={() => {
+                              window.scrollTo(0, 0);
+                              this.props.getData(1);
+                            }}
                           >
                             &laquo;
                           </span>
