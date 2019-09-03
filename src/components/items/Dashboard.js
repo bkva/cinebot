@@ -53,11 +53,18 @@ class Dashboard extends Component {
           <a href={link.link} style={{ color: "white" }}>
             <h5>{link.name}</h5>
           </a>
+
           <a href={link.link} style={{ color: "white" }}>
             {link.link}
           </a>
+          <hr />
           <div className="container mt-3 text-center">
-            <img src={link.img} className="img-fluid" alt="Poster" />
+            <img
+              src={link.img}
+              style={{ maxWidth: "30%" }}
+              className="img-fluid"
+              alt="Poster"
+            />
           </div>
           <br />
         </div>
@@ -83,7 +90,10 @@ class Dashboard extends Component {
             <li className={classes} key={number}>
               <span
                 className="page-link"
-                onClick={() => this.props.getData(number)}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  this.props.getData(number);
+                }}
               >
                 {number}
               </span>
@@ -159,7 +169,10 @@ class Dashboard extends Component {
                         <li className="page-item">
                           <span
                             className="page-link"
-                            onClick={() => this.props.getData(total_pages)}
+                            onClick={() => {
+                              window.scrollTo(0, 0);
+                              this.props.getData(total_pages);
+                            }}
                           >
                             &raquo;
                           </span>
