@@ -59,12 +59,22 @@ class Dashboard extends Component {
           </a>
           <hr />
           <div className="container mt-3 text-center">
-            <img
-              src={link.img}
-              style={{ maxWidth: "30%" }}
-              className="img-fluid"
-              alt="Poster"
-            />
+            {link.img === "https://image.tmdb.org/t/p/originalnull" ||
+            link.img === "null" ? (
+              <img
+                src="https://tvdb.niweera.gq/sample_poster.jpg"
+                style={{ maxWidth: "30%" }}
+                className="img-fluid"
+                alt="Poster"
+              />
+            ) : (
+              <img
+                src={link.img}
+                style={{ maxWidth: "30%" }}
+                className="img-fluid"
+                alt="Poster"
+              />
+            )}
           </div>
           <br />
         </div>
