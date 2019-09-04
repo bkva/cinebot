@@ -110,7 +110,7 @@ class Dashboard extends Component {
               <span
                 className="page-link"
                 onClick={() => {
-                  window.scrollTo(0, 0);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                   this.props.getData(number);
                 }}
               >
@@ -177,7 +177,7 @@ class Dashboard extends Component {
                           <span
                             className="page-link"
                             onClick={() => {
-                              window.scrollTo(0, 0);
+                              window.scrollTo({ top: 0, behavior: "smooth" });
                               this.props.getData(1);
                             }}
                           >
@@ -189,7 +189,7 @@ class Dashboard extends Component {
                           <span
                             className="page-link"
                             onClick={() => {
-                              window.scrollTo(0, 0);
+                              window.scrollTo({ top: 0, behavior: "smooth" });
                               this.props.getData(total_pages);
                             }}
                           >
