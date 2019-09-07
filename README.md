@@ -2,7 +2,8 @@
 [![HitCount](http://hits.dwyl.io/Niweera/cinebot.svg)](http://hits.dwyl.io/Niweera/cinebot)
 ![GitHub issues](https://img.shields.io/github/issues/Niweera/cinebot)
 ![Website](https://img.shields.io/website/https/cinebot.niweera.gq?down_color=lightgrey&down_message=offline&up_color=blue&up_message=online)
-[![Build Status](https://travis-ci.com/Niweera/cinebot.svg?branch=master)](https://travis-ci.com/Niweera/cinebot) 
+[![Build Status](https://travis-ci.com/Niweera/cinebot.svg?branch=master)](https://travis-ci.com/Niweera/cinebot)
+![Uptime](https://badgen.net/uptime-robot/day/m783415618-cc7ac4ed14db444cbdcd62e8)
 
 # CineBot
 
