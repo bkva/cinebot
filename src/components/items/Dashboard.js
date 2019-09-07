@@ -170,7 +170,7 @@ class Dashboard extends Component {
               <div className={"ml-3 mr-3"} style={{ textAlign: "left" }}>
                 {linkComponent}
                 <div className="row">
-                  <div className="col-md-12 text-center">
+                  <div className="col-md-12 text-center center-pagination">
                     <nav aria-label="Page navigation example">
                       <ul className="pagination text-center flex-wrap">
                         <li className="page-item">
