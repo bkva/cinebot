@@ -5,7 +5,7 @@ import Spinner from "../layout/Spinner";
 import { getStatus, getData } from "../../actions/itemActions";
 import ScrollUp from "../layout/ScrollUp";
 
-class Dashboard extends Component {
+class SearchResults extends Component {
   constructor() {
     super();
     this.state = {
@@ -59,7 +59,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { cinebotStatus } = this.props.item;
     const { data, total, total_pages, current_page, title } = this.state;
     let linkComponent, renderPageNumbers;
 
@@ -153,24 +152,15 @@ class Dashboard extends Component {
             }}
           >
             <div className="container">
-              <h1 className="h3">
-                Welcome to CineBot!
-                <br />{" "}
-                <span className="h4">All the links from one place...</span>
-              </h1>
-              <hr />
-              {cinebotStatus ? (
-                <div>
-                  <h1 className="h4">
-                    CineBot last ran @: {cinebotStatus.lastRan}
-                  </h1>
-                  <h1 className="h4">
-                    CineBot will run again @: {cinebotStatus.nextRun}
-                  </h1>
+              <div className="row">
+                <div className="col-md-4"></div>
+                <div className="col-md-6"></div>
+                <div className="col-md-2">
+                  <button type="button" className="btn btn-secondary btn-block">
+                    {"< Go Back"}
+                  </button>
                 </div>
-              ) : (
-                <Spinner />
-              )}
+              </div>
             </div>
           </div>
 
@@ -267,7 +257,7 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {
+SearchResults.propTypes = {
   getStatus: PropTypes.func.isRequired,
   getData: PropTypes.func.isRequired,
   item: PropTypes.object,
@@ -287,4 +277,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Dashboard);
+)(SearchResults);
