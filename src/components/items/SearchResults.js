@@ -28,9 +28,9 @@ class SearchResults extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    // this.setState({ title: "" });
+    this.setState({ title: "" });
     const { title } = this.state;
-    // this.props.history.push(`/results/${title}`);
+    this.props.history.push(`/results/${title}`);
     this.props.getDataByTitle(title, 1);
   }
 
@@ -52,6 +52,14 @@ class SearchResults extends Component {
           current_page: nextProps.item.results.page,
           total_pages: nextProps.item.results.total_pages
         };
+      } else if (nextProps.match.params.title !== prevState.title) {
+        return {
+          data: nextProps.item.results.data,
+          total: nextProps.item.results.total,
+          per_page: nextProps.item.results.per_page,
+          current_page: nextProps.item.results.page,
+          total_pages: nextProps.item.results.total_pages
+        };
       } else {
         return null;
       }
@@ -62,9 +70,10 @@ class SearchResults extends Component {
 
   render() {
     const { data, total, total_pages, current_page, title } = this.state;
+    const searchTitle = this.props.match.params.title;
     let linkComponent, renderPageNumbers;
 
-    if (data !== null) {
+    if (data !== null && data.length > 0) {
       linkComponent = data.map((link, index) => (
         <div className="mt-3" key={index}>
           <a href={link.link} style={{ color: "white" }}>
@@ -108,7 +117,7 @@ class SearchResults extends Component {
     }
 
     const pageNumbers = [];
-    if (total !== null) {
+    if (total !== null && total > 0) {
       for (let i = 1; i <= total_pages; i++) {
         pageNumbers.push(i);
       }
@@ -128,7 +137,7 @@ class SearchResults extends Component {
                 className="page-link"
                 onClick={() => {
                   window.scrollTo({ top: 0, behavior: "smooth" });
-                  this.props.getDataByTitle(title, number);
+                  this.props.getDataByTitle(searchTitle, number);
                 }}
               >
                 {number}
@@ -214,42 +223,52 @@ class SearchResults extends Component {
               color: "white"
             }}
           >
-            <div id="linkSection" className="container">
-              <div className={"ml-3 mr-3"} style={{ textAlign: "left" }}>
-                {linkComponent}
-                <div className="row">
-                  <div className="col-md-12 text-center">
-                    <nav aria-label="Page navigation example">
-                      <ul className="pagination text-center flex-wrap">
-                        <li className="page-item">
-                          <span
-                            className="page-link"
-                            onClick={() => {
-                              window.scrollTo({ top: 0, behavior: "smooth" });
-                              this.props.getDataByTitle(title, 1);
-                            }}
-                          >
-                            &laquo;
-                          </span>
-                        </li>
-                        {renderPageNumbers}
-                        <li className="page-item">
-                          <span
-                            className="page-link"
-                            onClick={() => {
-                              window.scrollTo({ top: 0, behavior: "smooth" });
-                              this.props.getDataByTitle(title, total_pages);
-                            }}
-                          >
-                            &raquo;
-                          </span>
-                        </li>
-                      </ul>
-                    </nav>
+            {total && total > 0 ? (
+              <div id="linkSection" className="container">
+                <div className={"ml-3 mr-3"} style={{ textAlign: "left" }}>
+                  {linkComponent}
+                  <div className="row">
+                    <div className="col-md-12 text-center">
+                      <nav aria-label="Page navigation example">
+                        <ul className="pagination text-center flex-wrap">
+                          <li className="page-item">
+                            <span
+                              className="page-link"
+                              onClick={() => {
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                                this.props.getDataByTitle(searchTitle, 1);
+                              }}
+                            >
+                              &laquo;
+                            </span>
+                          </li>
+                          {renderPageNumbers}
+                          <li className="page-item">
+                            <span
+                              className="page-link"
+                              onClick={() => {
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                                this.props.getDataByTitle(
+                                  searchTitle,
+                                  total_pages
+                                );
+                              }}
+                            >
+                              &raquo;
+                            </span>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <h5>
+                Sorry, nothing matched the search terms. Please try again with
+                different keywords.
+              </h5>
+            )}
           </div>
         </div>
       );

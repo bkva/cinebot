@@ -58,6 +58,7 @@ export const setItemLoading = () => {
 
 //Get paginated data by title
 export const getDataByTitle = (title, pageno) => dispatch => {
+  console.log(title, pageno);
   dispatch(setItemLoading());
   axios
     .get(
