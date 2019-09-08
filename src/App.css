@@ -235,3 +235,12 @@ a.socialIcon:hover,
   background-color: #d2d2d3;
   border-color: #a1a2a3;
 }
+
+#specialButton {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+#specialButton:hover {
+  background-color: #e9ecef; /* Green */
+  color: #495057;
+}

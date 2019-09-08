@@ -183,7 +183,7 @@ class Dashboard extends Component {
             }}
           >
             <div className="container">
-              <p className="h5 mb-4">Search movie or TV series</p>
+              <p className="h5 mb-4">Search movies or TV series</p>
               <form onSubmit={this.onSubmit}>
                 <div className="form-row">
                   <div className="col-lg-3 col-md-3 col-sm-1 col-0" />

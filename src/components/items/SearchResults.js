@@ -167,7 +167,11 @@ class SearchResults extends Component {
                 <div className="col-md-4"></div>
                 <div className="col-md-6"></div>
                 <div className="col-md-2">
-                  <Link className="btn btn-secondary btn-block" to="/">
+                  <Link
+                    className="btn btn-secondary btn-block"
+                    id="specialButton"
+                    to="/"
+                  >
                     {"< Go Back"}
                   </Link>
                 </div>
@@ -184,7 +188,7 @@ class SearchResults extends Component {
             }}
           >
             <div className="container">
-              <p className="h5 mb-4">Search movie or TV series</p>
+              <p className="h5 mb-4">Search movies or TV series</p>
               <form onSubmit={this.onSubmit}>
                 <div className="form-row">
                   <div className="col-lg-3 col-md-3 col-sm-1 col-0" />
