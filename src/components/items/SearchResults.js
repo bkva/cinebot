@@ -29,6 +29,7 @@ class SearchResults extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { title } = this.state;
+    this.props.getDataByTitle(title, 1);
     this.props.history.push(`/results/${title}`);
   }
 
@@ -127,7 +128,7 @@ class SearchResults extends Component {
                 className="page-link"
                 onClick={() => {
                   window.scrollTo({ top: 0, behavior: "smooth" });
-                  this.props.getData(number);
+                  this.props.getDataByTitle(title, number);
                 }}
               >
                 {number}
@@ -225,7 +226,7 @@ class SearchResults extends Component {
                             className="page-link"
                             onClick={() => {
                               window.scrollTo({ top: 0, behavior: "smooth" });
-                              this.props.getData(1);
+                              this.props.getDataByTitle(title, 1);
                             }}
                           >
                             &laquo;
@@ -237,7 +238,7 @@ class SearchResults extends Component {
                             className="page-link"
                             onClick={() => {
                               window.scrollTo({ top: 0, behavior: "smooth" });
-                              this.props.getData(total_pages);
+                              this.props.getDataByTitle(title, total_pages);
                             }}
                           >
                             &raquo;
