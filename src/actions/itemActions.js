@@ -2,7 +2,8 @@ import {
   GET_CINEBOT_STATUS,
   ITEM_LOADING,
   GET_ERRORS,
-  GET_LINKS
+  GET_LINKS,
+  GET_LINKS_BY_TITLE
 } from "./types";
 import axios from "axios";
 
@@ -64,7 +65,7 @@ export const getDataByTitle = (title, pageno) => dispatch => {
     )
     .then(res => {
       dispatch({
-        type: GET_LINKS,
+        type: GET_LINKS_BY_TITLE,
         payload: res.data
       });
     })

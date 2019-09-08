@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
-import { getStatus, getData } from "../../actions/itemActions";
+import { getDataByTitle } from "../../actions/itemActions";
 import ScrollUp from "../layout/ScrollUp";
 import { Link } from "react-router-dom";
 
@@ -29,12 +29,13 @@ class SearchResults extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { title } = this.state;
-    console.log(title);
+    this.props.history.push(`/results/${title}`);
   }
 
   componentDidMount() {
-    this.props.getStatus();
-    this.props.getData(1);
+    console.log(this.props);
+    // const { title } = this.props.match.params.title;
+    // this.props.getDataByTitle(title, 1);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -259,15 +260,13 @@ class SearchResults extends Component {
 }
 
 SearchResults.propTypes = {
-  getStatus: PropTypes.func.isRequired,
-  getData: PropTypes.func.isRequired,
+  getDataByTitle: PropTypes.func.isRequired,
   item: PropTypes.object,
   errors: PropTypes.object
 };
 
 const mapDispatchToProps = {
-  getStatus: getStatus,
-  getData: getData
+  getDataByTitle: getDataByTitle
 };
 
 const mapStateToProps = state => ({
