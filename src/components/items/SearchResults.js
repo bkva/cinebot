@@ -140,8 +140,8 @@ class SearchResults extends Component {
               <span
                 className="page-link"
                 onClick={() => {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
                   this.props.getDataByTitle(searchTitle, number);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
               >
                 {number}
@@ -243,8 +243,8 @@ class SearchResults extends Component {
                             <span
                               className="page-link"
                               onClick={() => {
-                                window.scrollTo({ top: 0, behavior: "smooth" });
                                 this.props.getDataByTitle(searchTitle, 1);
+                                window.scrollTo({ top: 0, behavior: "smooth" });
                               }}
                             >
                               &laquo;
