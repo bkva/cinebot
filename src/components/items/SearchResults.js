@@ -28,8 +28,9 @@ class SearchResults extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    // this.setState({ title: "" });
     const { title } = this.state;
-    this.props.history.push(`/results/${title}`);
+    // this.props.history.push(`/results/${title}`);
     this.props.getDataByTitle(title, 1);
   }
 
@@ -38,28 +39,12 @@ class SearchResults extends Component {
     this.props.getDataByTitle(title, 1);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log("prevProps :", prevProps);
-    console.log("prevState :", prevState);
-    if (this.state.title !== prevProps.match.params.title) {
-      this.setState({ title: prevProps.match.params.title });
-    }
-  }
-
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.errors !== prevState.errors) {
       return { errors: nextProps.errors };
     }
     if (nextProps.item.results !== null) {
       if (nextProps.item.results.page !== prevState.current_page) {
-        return {
-          data: nextProps.item.results.data,
-          total: nextProps.item.results.total,
-          per_page: nextProps.item.results.per_page,
-          current_page: nextProps.item.results.page,
-          total_pages: nextProps.item.results.total_pages
-        };
-      } else if (nextProps.match.params.title !== prevState.title) {
         return {
           data: nextProps.item.results.data,
           total: nextProps.item.results.total,
