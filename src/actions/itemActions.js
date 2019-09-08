@@ -3,7 +3,8 @@ import {
   ITEM_LOADING,
   GET_ERRORS,
   GET_LINKS,
-  GET_LINKS_BY_TITLE
+  GET_LINKS_BY_TITLE,
+  CLEAR_RESULTS
 } from "./types";
 import axios from "axios";
 
@@ -75,4 +76,9 @@ export const getDataByTitle = (title, pageno) => dispatch => {
         payload: err.response.data
       });
     });
+};
+
+//clear results data
+export const clearResults = () => dispatch => {
+  dispatch({ type: CLEAR_RESULTS });
 };

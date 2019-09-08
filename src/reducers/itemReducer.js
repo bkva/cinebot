@@ -2,7 +2,8 @@ import {
   GET_CINEBOT_STATUS,
   ITEM_LOADING,
   GET_LINKS,
-  GET_LINKS_BY_TITLE
+  GET_LINKS_BY_TITLE,
+  CLEAR_RESULTS
 } from "../actions/types";
 
 const initialState = {
@@ -24,6 +25,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         cinebotStatus: action.payload,
+        loading: false
+      };
+
+    case CLEAR_RESULTS:
+      return {
+        ...state,
+        results: null,
         loading: false
       };
 

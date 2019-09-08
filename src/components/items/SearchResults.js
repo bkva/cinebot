@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
-import { getDataByTitle } from "../../actions/itemActions";
+import { getDataByTitle, clearResults } from "../../actions/itemActions";
 import ScrollUp from "../layout/ScrollUp";
 import { Link } from "react-router-dom";
 
@@ -37,6 +37,10 @@ class SearchResults extends Component {
   componentDidMount() {
     const { title } = this.props.match.params;
     this.props.getDataByTitle(title, 1);
+  }
+
+  componentWillUnmount() {
+    this.props.clearResults();
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -251,11 +255,11 @@ class SearchResults extends Component {
                             <span
                               className="page-link"
                               onClick={() => {
-                                window.scrollTo({ top: 0, behavior: "smooth" });
                                 this.props.getDataByTitle(
                                   searchTitle,
                                   total_pages
                                 );
+                                window.scrollTo({ top: 0, behavior: "smooth" });
                               }}
                             >
                               &raquo;
@@ -284,12 +288,14 @@ class SearchResults extends Component {
 
 SearchResults.propTypes = {
   getDataByTitle: PropTypes.func.isRequired,
+  clearResults: PropTypes.func.isRequired,
   item: PropTypes.object,
   errors: PropTypes.object
 };
 
 const mapDispatchToProps = {
-  getDataByTitle: getDataByTitle
+  getDataByTitle: getDataByTitle,
+  clearResults: clearResults
 };
 
 const mapStateToProps = state => ({
