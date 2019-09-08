@@ -54,3 +54,24 @@ export const setItemLoading = () => {
     type: ITEM_LOADING
   };
 };
+
+//Get paginated data by title
+export const getDataByTitle = (title, pageno) => dispatch => {
+  dispatch(setItemLoading());
+  axios
+    .get(
+      `https://cb.niweera.gq/links/find?title=${title}&pageno=${pageno}&size=10`
+    )
+    .then(res => {
+      dispatch({
+        type: GET_LINKS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};

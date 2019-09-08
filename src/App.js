@@ -21,7 +21,7 @@ function App() {
           <div className="container">
             <Switch>
               <Route exact path="/" component={Dashboard} />
-              <Route exact path="/results" component={SearchResults} />
+              <Route exact path="/results/:name" component={SearchResults} />
               <Route component={NotFound} />
             </Switch>
           </div>

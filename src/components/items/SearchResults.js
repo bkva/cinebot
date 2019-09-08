@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
 import { getStatus, getData } from "../../actions/itemActions";
 import ScrollUp from "../layout/ScrollUp";
+import { Link } from "react-router-dom";
 
 class SearchResults extends Component {
   constructor() {
@@ -156,9 +157,9 @@ class SearchResults extends Component {
                 <div className="col-md-4"></div>
                 <div className="col-md-6"></div>
                 <div className="col-md-2">
-                  <button type="button" className="btn btn-secondary btn-block">
+                  <Link className="btn btn-secondary btn-block" to="/">
                     {"< Go Back"}
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -28,7 +28,7 @@ class Dashboard extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { title } = this.state;
-    console.log(title);
+    this.props.history.push(`/results/${title}`);
   }
 
   componentDidMount() {
