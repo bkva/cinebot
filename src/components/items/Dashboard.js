@@ -6,14 +6,30 @@ import { getStatus, getData } from "../../actions/itemActions";
 import ScrollUp from "../layout/ScrollUp";
 
 class Dashboard extends Component {
-  state = {
-    data: null,
-    total: null,
-    total_pages: null,
-    per_page: null,
-    current_page: null,
-    errors: null
-  };
+  constructor() {
+    super();
+    this.state = {
+      data: null,
+      total: null,
+      total_pages: null,
+      per_page: null,
+      current_page: null,
+      errors: null,
+      title: ""
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    const { title } = this.state;
+    console.log(title);
+  }
 
   componentDidMount() {
     this.props.getStatus();
@@ -44,7 +60,7 @@ class Dashboard extends Component {
 
   render() {
     const { cinebotStatus } = this.props.item;
-    const { data, total, total_pages, current_page } = this.state;
+    const { data, total, total_pages, current_page, title } = this.state;
     let linkComponent, renderPageNumbers;
 
     if (data !== null) {
@@ -155,6 +171,46 @@ class Dashboard extends Component {
               ) : (
                 <Spinner />
               )}
+            </div>
+          </div>
+
+          <div
+            className="jumbotron jumbotron-fluid mt-5"
+            style={{
+              backgroundColor: "#3b3a30",
+              textShadow: "0 1px 3px rgba(0,0,0,.5)",
+              color: "white"
+            }}
+          >
+            <div className="container">
+              <p className="h5 mb-4">Search movie or TV series</p>
+              <form onSubmit={this.onSubmit}>
+                <div className="form-row">
+                  <div className="col-lg-3 col-md-3 col-sm-1 col-0" />
+                  <div className="col-lg-3 col-md-3 col-sm-5 col-12">
+                    <input
+                      type="text"
+                      className="form-control mb-2"
+                      placeholder="Enter name"
+                      name="word"
+                      value={title}
+                      onChange={this.onChange}
+                      autoFocus
+                      required
+                    />
+                  </div>
+                  <div className="col-lg-3 col-md-3 col-sm-5 mb-2 col-12">
+                    <button
+                      type="submit"
+                      id="specialButton"
+                      className="btn btn-secondary mb-2 btn-block"
+                    >
+                      Search
+                    </button>
+                  </div>
+                  <div className="col-lg-3 col-md-3 col-sm-1 col-0" />
+                </div>
+              </form>
             </div>
           </div>
 
