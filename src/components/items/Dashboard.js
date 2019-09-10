@@ -77,7 +77,8 @@ class Dashboard extends Component {
             <div className="row">
               <div className="col-xl-4 col-lg-0 col-md-0 col-sm-0 col-0"></div>
               <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12">
-                {link.img === "null" ? (
+                {link.img === "null" ||
+                link.img === "https://image.tmdb.org/t/p/originalundefined" ? (
                   <a href={link.link}>
                     <img
                       style={{ maxWidth: "100%" }}
