@@ -6,6 +6,7 @@ import "./App.css";
 
 import Header from "./components/layout/Header";
 import Dashboard from "./components/items/Dashboard";
+import SearchResults from "./components/items/SearchResults";
 import NotFound from "./components/pages/NotFound";
 import Footer from "./components/layout/Footer";
 
@@ -20,6 +21,7 @@ function App() {
           <div className="container">
             <Switch>
               <Route exact path="/" component={Dashboard} />
+              <Route exact path="/results/:title" component={SearchResults} />
               <Route component={NotFound} />
             </Switch>
           </div>

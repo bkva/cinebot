@@ -2,7 +2,9 @@ import {
   GET_CINEBOT_STATUS,
   ITEM_LOADING,
   GET_ERRORS,
-  GET_LINKS
+  GET_LINKS,
+  GET_LINKS_BY_TITLE,
+  CLEAR_RESULTS
 } from "./types";
 import axios from "axios";
 
@@ -53,4 +55,30 @@ export const setItemLoading = () => {
   return {
     type: ITEM_LOADING
   };
+};
+
+//Get paginated data by title
+export const getDataByTitle = (title, pageno) => dispatch => {
+  dispatch(setItemLoading());
+  axios
+    .get(
+      `https://cb.niweera.gq/links/find?title=${title}&pageno=${pageno}&size=10`
+    )
+    .then(res => {
+      dispatch({
+        type: GET_LINKS_BY_TITLE,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+//clear results data
+export const clearResults = () => dispatch => {
+  dispatch({ type: CLEAR_RESULTS });
 };

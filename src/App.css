@@ -236,7 +236,17 @@ a.socialIcon:hover,
   border-color: #a1a2a3;
 }
 
+
 .center-pagination {
   display: flex;
   justify-content: center;
+}
+
+#specialButton {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+#specialButton:hover {
+  background-color: #e9ecef; /* Green */
+  color: #495057;
 }

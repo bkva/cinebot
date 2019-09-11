@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
-import { getStatus, getData } from "../../actions/itemActions";
+import { getDataByTitle, clearResults } from "../../actions/itemActions";
 import ScrollUp from "../layout/ScrollUp";
+import { Link } from "react-router-dom";
 
-class Dashboard extends Component {
+class SearchResults extends Component {
   constructor() {
     super();
     this.state = {
@@ -27,28 +28,41 @@ class Dashboard extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    this.setState({ title: "" });
     const { title } = this.state;
     this.props.history.push(`/results/${title}`);
+    this.props.getDataByTitle(title, 1);
   }
 
   componentDidMount() {
-    this.props.getStatus();
-    this.props.getData(1);
+    const { title } = this.props.match.params;
+    this.props.getDataByTitle(title, 1);
+  }
+
+  componentWillUnmount() {
+    this.props.clearResults();
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.errors !== prevState.errors) {
       return { errors: nextProps.errors };
     }
-
-    if (nextProps.item.links !== null) {
-      if (nextProps.item.links.page !== prevState.current_page) {
+    if (nextProps.item.results !== null) {
+      if (nextProps.item.results.page !== prevState.current_page) {
         return {
-          data: nextProps.item.links.data,
-          total: nextProps.item.links.total,
-          per_page: nextProps.item.links.per_page,
-          current_page: nextProps.item.links.page,
-          total_pages: nextProps.item.links.total_pages
+          data: nextProps.item.results.data,
+          total: nextProps.item.results.total,
+          per_page: nextProps.item.results.per_page,
+          current_page: nextProps.item.results.page,
+          total_pages: nextProps.item.results.total_pages
+        };
+      } else if (nextProps.match.params.title !== prevState.title) {
+        return {
+          data: nextProps.item.results.data,
+          total: nextProps.item.results.total,
+          per_page: nextProps.item.results.per_page,
+          current_page: nextProps.item.results.page,
+          total_pages: nextProps.item.results.total_pages
         };
       } else {
         return null;
@@ -59,11 +73,11 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { cinebotStatus } = this.props.item;
     const { data, total, total_pages, current_page, title } = this.state;
+    const searchTitle = this.props.match.params.title;
     let linkComponent, renderPageNumbers;
 
-    if (data !== null) {
+    if (data !== null && data.length > 0) {
       linkComponent = data.map((link, index) => (
         <div className="mt-3" key={index}>
           <a href={link.link} style={{ color: "white" }}>
@@ -77,8 +91,7 @@ class Dashboard extends Component {
             <div className="row">
               <div className="col-xl-4 col-lg-0 col-md-0 col-sm-0 col-0"></div>
               <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12">
-                {link.img === "null" ||
-                link.img === "https://image.tmdb.org/t/p/originalundefined" ? (
+                {link.img === "null" ? (
                   <a href={link.link}>
                     <img
                       style={{ maxWidth: "100%" }}
@@ -108,7 +121,7 @@ class Dashboard extends Component {
     }
 
     const pageNumbers = [];
-    if (total !== null) {
+    if (total !== null && total > 0) {
       for (let i = 1; i <= total_pages; i++) {
         pageNumbers.push(i);
       }
@@ -127,8 +140,8 @@ class Dashboard extends Component {
               <span
                 className="page-link"
                 onClick={() => {
+                  this.props.getDataByTitle(searchTitle, number);
                   window.scrollTo({ top: 0, behavior: "smooth" });
-                  this.props.getData(number);
                 }}
               >
                 {number}
@@ -154,24 +167,19 @@ class Dashboard extends Component {
             }}
           >
             <div className="container">
-              <h1 className="h3">
-                Welcome to CineBot!
-                <br />{" "}
-                <span className="h4">All the links from one place...</span>
-              </h1>
-              <hr />
-              {cinebotStatus ? (
-                <div>
-                  <h1 className="h4">
-                    CineBot last ran @: {cinebotStatus.lastRan}
-                  </h1>
-                  <h1 className="h4">
-                    CineBot will run again @: {cinebotStatus.nextRun}
-                  </h1>
+              <div className="row">
+                <div className="col-md-4"></div>
+                <div className="col-md-6"></div>
+                <div className="col-md-2">
+                  <Link
+                    className="btn btn-secondary btn-block"
+                    id="specialButton"
+                    to="/"
+                  >
+                    {"< Go Back"}
+                  </Link>
                 </div>
-              ) : (
-                <Spinner />
-              )}
+              </div>
             </div>
           </div>
 
@@ -223,42 +231,52 @@ class Dashboard extends Component {
               color: "white"
             }}
           >
-            <div id="linkSection" className="container">
-              <div className={"ml-3 mr-3"} style={{ textAlign: "left" }}>
-                {linkComponent}
-                <div className="row">
-                  <div className="col-md-12 text-center center-pagination">
-                    <nav aria-label="Page navigation example">
-                      <ul className="pagination text-center flex-wrap">
-                        <li className="page-item">
-                          <span
-                            className="page-link"
-                            onClick={() => {
-                              window.scrollTo({ top: 0, behavior: "smooth" });
-                              this.props.getData(1);
-                            }}
-                          >
-                            &laquo;
-                          </span>
-                        </li>
-                        {renderPageNumbers}
-                        <li className="page-item">
-                          <span
-                            className="page-link"
-                            onClick={() => {
-                              window.scrollTo({ top: 0, behavior: "smooth" });
-                              this.props.getData(total_pages);
-                            }}
-                          >
-                            &raquo;
-                          </span>
-                        </li>
-                      </ul>
-                    </nav>
+            {total && total > 0 ? (
+              <div id="linkSection" className="container">
+                <div className={"ml-3 mr-3"} style={{ textAlign: "left" }}>
+                  {linkComponent}
+                  <div className="row">
+                    <div className="col-md-12 text-center">
+                      <nav aria-label="Page navigation example">
+                        <ul className="pagination text-center flex-wrap">
+                          <li className="page-item">
+                            <span
+                              className="page-link"
+                              onClick={() => {
+                                this.props.getDataByTitle(searchTitle, 1);
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                              }}
+                            >
+                              &laquo;
+                            </span>
+                          </li>
+                          {renderPageNumbers}
+                          <li className="page-item">
+                            <span
+                              className="page-link"
+                              onClick={() => {
+                                this.props.getDataByTitle(
+                                  searchTitle,
+                                  total_pages
+                                );
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                              }}
+                            >
+                              &raquo;
+                            </span>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <h5>
+                Sorry, nothing matched the search terms. Please try again with
+                different keywords.
+              </h5>
+            )}
           </div>
         </div>
       );
@@ -268,16 +286,16 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {
-  getStatus: PropTypes.func.isRequired,
-  getData: PropTypes.func.isRequired,
+SearchResults.propTypes = {
+  getDataByTitle: PropTypes.func.isRequired,
+  clearResults: PropTypes.func.isRequired,
   item: PropTypes.object,
   errors: PropTypes.object
 };
 
 const mapDispatchToProps = {
-  getStatus: getStatus,
-  getData: getData
+  getDataByTitle: getDataByTitle,
+  clearResults: clearResults
 };
 
 const mapStateToProps = state => ({
@@ -288,4 +306,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Dashboard);
+)(SearchResults);
